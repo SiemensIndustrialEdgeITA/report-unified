@@ -1,0 +1,43 @@
+{
+  "storagePortConfig": "X61",
+  "triggerTagConfig": "TriggerTag1",
+  "startTimeTag": "ReportStartTimeTag",
+  "endTimeTag": "ReportEndTimeTag",
+  "templateFilenameTag": "TemplateFilenameTag",
+  "reportFilenameTag": "ReportFilenameTag",
+  "triggerDeleteReports": "TriggerDeleteReports",
+  "loggingTags": [
+    {
+      "id": "ProductionData",
+      "tags": [
+        "GoodPieces:LT_1",
+        "BadPieces:LT_1"
+      ]
+    },
+    {
+      "id": "TankData",
+      "tags": [
+        "WaterLevel:LT_1",
+        "OilLevel:LT_1"
+      ]
+    }
+  ],
+  "tags": [
+    "Datetime",
+    "ID",
+    "WaterBottles",
+    "ColaBottles",
+    "OrangeBottles",
+    "TotalPieces",
+    "Quality",
+    "Temperature",
+    "Pressure"
+  ],
+  "alarms": true,
+  "share": {
+    "enabled": true,
+    "sharedFolderUrl": "//192.168.1.99/iot_share",
+    "sharedFolderUser": "iot",
+    "sharedFolderPassword": "iot"
+  }
+}

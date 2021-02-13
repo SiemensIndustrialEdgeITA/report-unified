@@ -1,0 +1,20 @@
+{
+  "name": "carbone_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "carbone": "^2.0.1",
+    "csvtojson": "^2.0.10",
+    "graphql": "^15.4.0",
+    "graphql-request": "^3.3.0",
+    "isomorphic-fetch": "^3.0.0",
+    "node-xlsx": "^0.15.0"
+  }
+}

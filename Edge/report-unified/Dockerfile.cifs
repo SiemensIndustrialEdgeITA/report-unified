@@ -1,0 +1,22 @@
+#Choose Base Image
+FROM node:12-stretch-slim
+
+# Create app directory
+WORKDIR /app/
+
+# copy and install cifs mount installer
+COPY install_cifs.sh ./
+RUN chmod u+x ./install_cifs.sh && ./install_cifs.sh
+
+# Copy and install json dependencies 
+COPY app/package*.json ./
+RUN npm install 
+
+# Bundle app source
+COPY app/ .
+
+# Copy example templates
+COPY example/ ./example/
+
+# Application start script
+CMD ["/bin/sh", "/app/start.sh"]

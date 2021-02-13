@@ -1,0 +1,21 @@
+version: '2.4'
+services:
+  report-unified:
+    image: report-unified:3.0.0
+    environment: 
+      - TZ="Europe/Rome"
+      - LOAD_EXAMPLE=true
+    build:
+      context: .
+      dockerfile: Dockerfile.cifs
+    volumes:
+      - './cfg-data/:/cfg-data/'
+      - './publish/:/publish/'
+      - '/tmp/siemens/automation:/tmp/siemens/automation'
+      - '/media/simatic:/media/simatic:ro,slave'
+    mem_limit: 768mb
+    #privileged: true
+    cap_add:
+        - SYS_ADMIN
+        #- DAC_READ_SEARCH
+        - ALL
