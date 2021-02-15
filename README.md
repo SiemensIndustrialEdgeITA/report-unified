@@ -2,6 +2,8 @@
 
 The report-unified app allows you to generate dynamic time-based report documents containing data from the WinCC Unified supervisor system, only for **Unified Comfort Panels** devices with Industrial Edge functionality activated.
 
+For Italian translated guide, see the [README_it](./docs/README_it.pdf) file.
+
 ![1_Introduction_DemoReport](./docs/img/1_Introduction_DemoReport.png)
 
 ## Table of Contents
@@ -546,8 +548,8 @@ services:
 The above compose file:
 
 - creates the ```report-unified``` service container
-- build our custom Node-RED Docker image using ```Dockerfile.cifs``` file adding ```SYS_ADMIN``` and ```ALL``` capabilities to be able to mount CIFS shared folders.
-- sets the timezone to ```Europe/Rome```
+- build our custom ```report-unified:3.0.0``` Docker image using ```Dockerfile.cifs``` file adding ```SYS_ADMIN``` and ```ALL``` capabilities to be able to mount CIFS shared folders.
+- sets the timezone to ```Europe/Rome``` and enable the Examples loading on container startup with the env variable ```LOAD_EXAMPLE```.
 - persists the configuration volume ```/cfg-data``` dir inside the container to the```cfg-data``` volume in the Host System. Here there will be config and templates files.
 - persists the configuration volume ```/publish``` dir inside the container to the```publish``` volume in the Host System. Here will be saved new reports files.
 - persists the configuration volume ```/tmp/siemens/automation``` dir inside the container to the```/tmp/siemens/automation``` volume in the Host System. This is the mounting for WinCC communication pipes.
@@ -582,15 +584,17 @@ COPY example/ ./example/
 CMD ["/bin/sh", "/app/start.sh"]
 ```  
 
-Docker start building process from NodeJS base image ```node:12-stretch-slim```.
-The ```install_cifs.sh``` script will install all the necessary packages and will setup the folder for shared folder mounting.
-Then, the app source code is copied to the container and all nodes are installed by ```npm install``` command.
-The example folder is copied with demo templates and config file.
-The ```ENTRYPOINT``` command will start the app by using the ```start.sh``` script that will configure the app for running.
+- From the docker-compose file, Docker will start the build process from the base image ```node:12-stretch-slim``` with Debian Stretch and NodeJS v12 preinstalled.
+- The ```install_cifs.sh``` script will install all the necessary packages and will setup the folder for Windows shared folder mounting.
+- Then, the app source code is copied to the container and all nodes are installed by ```npm install``` command.
+- The example folder is copied with demo templates and config file.
+- The ```CMD``` command will start the app by using the ```start.sh``` script that will configure the app for running.
 
 ## Import in Edge App Publisher
 
-By importing the ```docker-compose.yml``` file in the Edge App Publisher some changes are applied in order to make the app compatible with the SIMATIC Edge environment:
+In order to import the report-unified app into the **SIMATIC Edge App Publisher** software, you can use the file ```report-unified_x.x.x.app``` and load it with the **"Import"** button from your Applications or alternatively you can build the report-unified image in a Docker environment using the file ```docker-compose.yml``` described above with the command ```docker-compose up -d --build```.
+
+By importing the ```docker-compose.yml``` file described above in the Edge App Publisher some changes will be applied in order to make the app compatible with the SIMATIC Edge environment:
 
 - The ```build``` parameter is deleted since the image was already builded.
 
@@ -626,7 +630,7 @@ services:
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed "AS IS" under the MIT License. See `LICENSE` for more information.
 
 ## Contributing
 
