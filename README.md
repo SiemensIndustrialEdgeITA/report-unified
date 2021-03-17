@@ -17,6 +17,7 @@ For Italian translated guide, see the [README_it](./docs/README_it.pdf) file.
     - [Software Requirements](#software-requirements)
   - [App Installation](#app-installation)
     - [Prerequisites](#prerequisites)
+    - [Download App File](#download-app-file)
     - [Load App on Unified Comfort Panel](#load-app-on-unified-comfort-panel)
   - [Application Example](#application-example)
     - [Goal of the application](#goal-of-the-application)
@@ -115,6 +116,12 @@ The report-unified application comes with the pre-built app package ```report-un
 
 - A Unified Comfort Panel device with the SIMATIC Edge feature enabled (see chapter [Edge Enablement on Unified Comfort Panels](#edge-enablement-on-unified-comfort-panels));
 - At least one WinCC user must be enabled to access the SIMATIC Edge portal (see chapter [Edge User Authentication on Unified Comfort](#edge-user-authentication-on-unified-comfort-panels)).
+
+### Download App File
+
+The report-unified app can be downloaded in **.app** format using this secure Google Drive link:
+
+- [report-unified_3.0.31.app](https://drive.google.com/file/d/1CjjqR0_Ln_YcPPcjjjEtgql5n8VbZ7y0/view?usp=sharing)
 
 ### Load App on Unified Comfort Panel
 
@@ -358,6 +365,15 @@ Import in the "Task Scheduler" section the scheduled task **"EdgeReportTriggerTa
 This will be necessary for communication between the report-unified application and the WinCC Unified project.
 
 ![6_WinCCUnifiedConfiguration_EdgeReportTriggerTask](./docs/img/6_WinCCUnifiedConfiguration_EdgeReportTriggerTask.png)
+
+When importing the scheduled task from Library, it will be necessary to define also in the **"Global Definitions"** menu the function calls from **EdgeReportGlobalModule** used in the script to generate the report and to create the PDF file (respectively the functions ```CreateReport()``` and ```ReportToPDF()```). To achieve that, insert in the "Global Definitions" menu the following lines of code:
+
+``` javascript
+import {CreateReport} from 'EdgeReportGlobalModule';
+import {ReportToPDF} from 'EdgeReportGlobalModule';
+```
+
+![6_WinCCUnifiedConfiguration_EdgeReportTriggerTask_GlobalDefinitions](./docs/img/6_WinCCUnifiedConfiguration_EdgeReportTriggerTask_GlobalDefinitions.png)
 
 ## Templates Configuration
 
